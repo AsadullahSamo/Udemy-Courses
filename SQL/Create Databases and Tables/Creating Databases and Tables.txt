@@ -1,0 +1,21 @@
+1. show databases;     --> To show all abailable databases
+2. CREATE DATABASE <name>;    --> e.g. CREATE DATABASE employee;
+3. DROP DATABASE <name>;      --> e.g. DROP DATABASE employee;
+4. USE <database name>;       --> To enter into database
+5. SELECT DATABASE();         --> To show currently active database
+
+6. CREATE TABLE <Table Name> 
+col1 datatype,               
+col2 datatype                
+);                           
+
+e.g.  CREATE TABLE employee (
+        name VARCHAR(46),
+	id int
+	);
+
+//           FOR TABLES 
+1. SHOW TABLES;     --> Shows tables in our current database
+2. SHOW COLUMNS FROM <Table Name>  // (OR WE CAN ALSO USE) 
+   DESCRIBE <Table Name>;
+3. DROP TABLE <Table Name>;   -->   e.g. DROP TABLE employee;

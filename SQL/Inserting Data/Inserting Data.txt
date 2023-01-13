@@ -1,0 +1,21 @@
+1. INSERT INTO <Table Name>
+   VALUES (value1, value2),
+   (value1, value2);
+e.g.
+   INSERT INTO games 
+   VALUES (1, 'GTA V'),
+   (2, 'Spider Man');
+
+2. Null in a table means that null value is permitted
+   INSERT INTO people(name) VALUES ('John');    --> Here as we not entered age, age will be null
+   INSERT INTO people(name) VALUES ('John\'s Daughter');    --> John's Daughter    
+
+3. To use default values to a column (means if we not give column a value, it will use this default value)
+Syntax:  Name VARCHAR(45) Default 'Asad' 
+
+4. For Primary Key
+Syntax: id INT,
+	PRIMARY KEY(id);
+
+5. Auto Increment
+	id INT AUTO_INCREMENT;     --> Auto increments value by 1

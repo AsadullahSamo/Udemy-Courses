@@ -1,0 +1,25 @@
+A. Retrieve
+1.  SELECT statement
+Syntax: SELECT col1, col2 FROM <Table Name>     e.g. SELECT name, age FROM cats;
+
+2.  WHERE Clause
+Syntax: SELECT col1, col2 FROM <Table Name> WHERE colname = condition;     e.g. SELECT name, age FROM cats WHERE age = 4;
+
+3.  Aliases (some temp name for col at the time of output)
+e.g.: SELECT cat_id AS id, name FROM cats;
+
+B. Update
+
+1. update <Table Name> set col = newValue WHERE col = condition;
+e.g. update cats set breed = 'shorthair' WHERE name = 'Tammy';
+If we didn't include WHERE Clause every col will be updated with the value given to set
+		
+		(For multiple updates)
+
+UPDATE cats SET name = 'Blue', breed = 'shorthair' WHERE age > 13;
+
+. A quick rule of thumb is "Always select column before update" --> To see what we're updating or deleting, so as to avoid data losses
+
+C. DELETE
+1. DELETE FROM <Table Name> WHERE colName = condition;   e.g. DELETE FROM cats WHERE age = 13;
+(Without WHERE the entire table will be deleted)
