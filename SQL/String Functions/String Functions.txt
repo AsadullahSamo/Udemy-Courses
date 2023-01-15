@@ -1,0 +1,31 @@
+1. CONCAT(arg1, arg2, arg3);     e.g. SELECT CONCAT('Asad', '  ', 'Samo') AS Full Name;
+
+2. CONCAT_WS()     --> (Concat with separator) It will insert first arg in between with every single arg   e.g. SELECT CONCAT('!', 'hi', 'bye', 'lol') AS result --> Output will be hi!bye!lol
+
+3. SUBSTRING(String str, int startingPos, int length)  --> e.g. SELECT SUBSTRING('Asadullah', 1, 4) AS Substring --> Output: Asad
+. If length is not provided, it'll return substring till end of String
+. If -ve value in pos is provided, it'll go from last to position.  i.e CONCAT('Asad', -2) --> Output: ad
+. SUBSTR() can also be used in place of SUBSTRING()
+
+4. REPLACE(str, from str, to str)  --> e.g. REPLACE('Asad Samo', 'Asad', 'Junaid')     --> Now asad will be replaced with Junaid
+
+5. REVERSE(String arg)  --> Reverse the string
+
+6. CHAR_LENGTH(String arg)  --> Tells number of characters in a String (Also LENGTH(String arg) which returns number of characters in bytes)
+
+7. UPPER AND LOWER --> Turns String into Uppercase OR Lowercase 
+
+8. INSERT(String str, int start, int numOfCharsToReplace, String newStr) --> Inserts a substring in a String
+e.g. SELECT INSERT('Hello Tomb Raider', 6, 0, ' There') AS 'Insert';    -- Insert There at position 6 while replacing 0 chars in Hello Tomb Raider
+ 
+9. LEFT(String str, int numOfChars) AND RIGHT(String str, int numOfChars)  --> returns number of characters specified at left or right
+
+10. REPEAT(str, numOfTimesToRepeat) --> Repeat String at given number of times
+e.g. SELECT REPEAT('ha', 4);
+
+11. TRIM(LEADING '.' FROM '.....Asad')  --> It removes leading . from ......Asad
+    TRIM(TRAILING '.' FROM 'Asad....')  --> It removes trailing(end) . from Asad......
+
+12. SELECT strcmp("Asad", "Junaid") AS 'String compare';    -- returns 1 if length of 1st str > 2nd str, 0 if both are equal, -1 if length of 1st str < 2nd str
+
+13. SELECT FIELD("Asad", "Junaid", "Mohsin", 'Asad') AS FIELD;    -- Search first arg from rest of list
