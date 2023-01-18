@@ -1,0 +1,26 @@
+. An aggregate function performs a calculation on a set of values, and returns a single 
+value, except for COUNT(*). Aggregate functions ignore null values. Aggregate functions 
+are often used with the GROUP BY clause of the SELECT statement.
+. They work on multiple rows
+
+1.  COUNT(colName)   --> Counts all rows rows from cols
+
+SELECT COUNT(*) AS 'Count all rows' FROM books;      --  Count all rows from books
+SELECT COUNT(author_fname) FROM books;               --  Count all author's first names
+SELECT COUNT(DISTINCT author_fname) FROM books;      --  Count all distinct first names of author
+
+2. GROUP BY   --> "GROUP BY summarizes OR aggregates identical data into single rows"
+-- Question: How many books written by each author
+SELECT author_lname FROM books GROUP BY author_lname;          -- Group the rows from books table based on author_lname --> All author with same name will be grouped into one row and counted as one row
+SELECT author_lname, COUNT(title) FROM books       -- Count all books written by each author, it counts all rows in each group, not all the table(that's what we are saying to this)
+GROUP BY author_lname
+
+b. -- GROUP BY with multiple cols
+SELECT author_fname, author_lname fROM books GROUP BY author_lname, author_fname;
+
+
+3. MIN() AND MAX()
+-- Question: Find minimum released year
+SELECT MIN(released_year) FROM books;
+SELECT MAX(pages) FROM books;
+SELECT MIN(author_lname), MAX(author_lname) FROM books;      -- it finds min and max based on alphabetical order

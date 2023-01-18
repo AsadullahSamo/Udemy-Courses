@@ -1,0 +1,36 @@
+1. DISTINCT CLAUSE --> Use to select distinct values
+e.g. (As we have many author with same lname in books table, we can get distinct author's lname using)
+	SELECT DISTINCT(author_lname) FROM books;
+. To get distinct full name we can either use 
+a. SELECT DISTINCT CONCAT(author_fname, ' ', author_lname) FROM books; OR
+b. SELECT DISTINCT author_fname, author_lname FROM books;
+
+2. ORDER BY CLAUES --> Sort our results
+e.g. a. SELECT author_lname FROM books 
+     ORDER BY author_lname;      (It is ASC by default) we can do descending by ORDER BY DESC
+OR   
+b. SELECT author_fname, released_year, pages FROM books
+   ORDER BY 3;     --> (Means Order by third col from specified cols, in this case pages)
+
+	-- ORDER BY (multiple cols, first it'll order by lname, then released_year in our below example)
+c. SELECT author_lname, released_year, title FROM books
+   ORDER BY author_lname, released_year;
+
+d. ORDER BY with cols that are not in our table but we used as Alias, or as concat etc.
+e.g. SELECT CONCAT(author_fname, ' ', author_lname) AS author FROM books
+     ORDER BY author;
+
+3. LIMIT --> Allow to control the number of results we get back
+e.g. SELECT author_fname, author_lname, released_year FROM books
+     ORDER BY released_year LIMIT 5; 
+
+b. LIMIT 3, 5    --> returns two rows from row 3 (i.e. 4 and 5)
+e.g. SELECT author_fname, author_lname, released_year FROM books
+     ORDER BY released_year LIMIT 2, 5; 
+
+4. LIKE -->  Better Searching  (Always used with wildCards --> %, _, *, [], [-] etc)
+e.g. SELECT author_fname FROM books WHERE author_fname LIKE '%da%';
+
+	-- WildCards
+-- 1. % --> Match in somewhere   e.g. '%n' --> end at n, 'a%' --> starts with a, '%ad%' --> ad present anywhere
+-- 2. _ Exactly one character 
