@@ -1,0 +1,28 @@
+1. !=
+2. NOT LIKE
+3. >
+4. <=, <, >=
+5. LOGICAL AND   --> Can have as many chains as we want e.g.
+	SELECT title FROM books 
+	WHERE author_lname = 'Eggers'
+	AND released_year > 2010
+	AND title LIKE '%novel%';       (same for OR)
+6. LOGICAL OR
+7. BETWEEN, NOT BETWEEN 
+
+CAST(expr AS TYPE)   --> e.g. CAST('09:00:10' AS TIME);
+e.g. SELECT CAST('09:00:10' AS TIME)
+. Better to use CAST() with between and all sort of date and time comparisons
+
+8. IN, NOT IN
+9. CASE
+	SELECT title, stock_quantity,
+	CASE
+		WHEN stock_quantity BETWEEN 0 AND 50 THEN '*'
+    		WHEN stock_quantity BETWEEN 51 AND 100 THEN '**'
+	   	ELSE '***'
+    		END AS stock_rating
+	FROM books;
+
+
+10. IS NULL, IS NOT NULL

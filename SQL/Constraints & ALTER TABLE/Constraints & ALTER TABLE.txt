@@ -1,0 +1,78 @@
+1. UNIQUE
+
+e.g.
+
+CREATE TABLE companies(
+	supplier_id INT AUTO_INCREMENT,
+	name VARCHAR(45) NOT NULL,
+	phone VARCHAR(45) NOT NULL UNIQUE,
+	address VARCHAR(45) NOT NULL,
+	PRIMARY KEY (supplier_id)
+);
+
+
+2. CHECK
+
+e.g.
+
+CREATE TABLE partiers(
+	name VARCHAR(45),
+	age INT CHECK (age > 18)      (Make sure age is always greater than 18)
+);
+
+3. Named Constraints --> Giving custom names to constraints message which is displayed as a result, if a constraint is violated
+
+e.g.
+
+CREATE TABLE partiers(
+	name VARCHAR(45),
+	age INT,
+	CONSTRAINT age_over_18 CHECK (age > 18)
+);
+.. Now if age is > 18, this message 'age_over_18' will be displayed
+
+
+4. Multiple Column Constraints --> Here in below example, combination of name_address should be unique
+e.g.
+
+CREATE TABLE companies(
+	name VARCHAR(45) NOT NULL,
+	address VARCHAR(45) NOT NULL UNIQUE,
+	CONSTRAINT name_address UNIQUE(name, address)
+);
+
+
+5. Alter TABLE
+
+   ALTER --> Use to 
+	1. add new column in table
+	Syntax: ALTER Table Table_NAME ADD(ColName DATATYPE, COLNAME DATATYPE);
+ 	E.g. (In Our Case) ALTER Table Students ADD(GRADE VARCHAR(45), Roll_Number INT);
+	
+	2. Drop/Delete the column
+	Syntax: ALTER Table Table_NAME DROP COLUMN ColName;
+	E.g. ALTER TABLE Students DROP COLUMN GRADE;
+	
+	3. Modify the datatype (increase or decrease its size) OR Change the datatype (but make sure col is empty if you change datatype)
+	Syntax: ALTER Table Table_NAME MODIFY Colname DATATYPE(SIZE);
+	e.g. ALTER Table Students MODIFY Column_Name VARCHAR(50);  --> (VARCHAR size increased from 45 to 50)
+
+	4. Rename the Column
+	Syntax: ALTER Table Table_NAME
+	RENAME CoLUMN ColName1 TO NewName1;
+	RENAME CoLUMN ColName2 TO NewName2;
+			     .           .
+			     .           .
+	RENAME CoLUMN ColNameN TO NewNameN;
+	e.g. ALTER TABLE Students 
+	RENAME COLUMN GRADE TO result,
+	RENAME COLUMN Roll_Number TO StudentRollNumber;
+
+	5. Add constraint
+	Syntax:	ALTER TABLE tableName ADD CONSTRAINT 'constraint_definition' CHECK (condition);
+	e.g. ALTER TABLE students ADD CONSTRAINT 'age must be positive' CHECK (age >= 0);
+
+	6. Drop Constraint
+	Syntax: ALTER TABLE TableName DROP CONSTRAINT constraint_definition
+	e.g. ALTER TABLE students DROP CONSTRAINT 'age must be positive';
+

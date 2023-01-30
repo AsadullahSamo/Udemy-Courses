@@ -1,0 +1,64 @@
+. For more information refer to docs 
+
+A. String data types
+.  Stores Text
+.  We've seen VARCHAR()
+. 1. CHAR() is used when we know that the column have fixed size of chars. e.g. State abbreviations column all have chars 2 (i.e. 'CA', 'AL', 'TX' etc), OR Yes/NO Flags (i.e. Y/N) OR zip Codes etc
+. Char has fixed Length
+. CHAR(2) --> Only two chars are allowed (if we stored 1, that'll also be fine) but it'll best optimize to take up min space having 2 chars
+
+B. Numeric Types
+.  Stores whole number 
+.  We've seen int
+1.  TINYINT   --> takes 1 byte
+2.  SMALLINT  --> takes 2 bytes
+3.  MEDIUMINT --> takes 3 bytes
+4.  INT       --> takes 4 bytes
+5.  BIGINT    --> takes 5 bytes
+
+.. if we did like CREATE TABLE ABC ( column TINYINT UNSIGNED);    --> Now -ve values can't be stored
+
+C. Decimal
+1. DECIMAL --> e.g. CREATE TABLE Store(prices DECIMAL(5, 2));    --> where 5 is total number of digits, and 2 is digits after decimal (means total 5 digits and 2 digits after decimal is allowed. e.g. 755.98 OR 75.8 but 1560.1 not allowed)
+2. FLOAT   3. DOUBLE
+
+D. Dates and Times
+1. DATE --> Date with no time. 
+.  Format is 'YYYY-MM-DD'
+2. TIME --> Time with no date.
+.  Format is 'HH:MM:SS'
+2. DATETIME --> Date with time
+.  Format is 'YYYY-MM-DD HH:MM:SS'
+
+e.g. CREATE TABLE people (
+	name VARCHAR(45)
+	birthedate DATE,
+	birthetime TIME,
+	birthedt DATETIME,
+	);
+-- Then to insert
+	INSERT INTO people VALUES('Asad', '2003-12-11', '11:00:00', '2003-12-11 11:00:00' 
+
+.  Some functions of date and time and datetime are 
+1. CURDATE() --> Returns current date
+2. CURTIME() --> Returns current Time
+3. NOW() --> Returns current dateTime
+4. DAY(birthdate) --> Returns the day of month
+5. MONTHNAME(birthdate) --> Returns name of the month
+6. HOUR(birthtime) --> Returns hour of birth time
+7. DATE(birthdt)   --> Returns date from datetime
+8. TIME(birthdt)   --> Returns time from datetime
+e.g. SELECT CURDATE(); 
+	OR 
+INSERT INTO people VALUES('ABC', CURDATE(), CURTIME(), NOW());
+
+.  Formatting Dates
+1. DATE_FORMAT(string, '%a %b') etc. Refer to docs for these specifiers
+.  Date Math
+1. DATEDIFF(firstDate, SecondDate) --> it subtracts SecondDate from firstDate and return number of days
+2. DATE_ADD(date, INTERVAL date)  --> e.g. DATE_ADD(CURDATE(), INTERVAL 1 YEAR);  --> Adds 1 year to current date, Also DATE_SUB(date, INTERVAL date)
+
+E. TimeStamps
+. Nearly Same as dateTime but takes less storage
+. Works for only date between 1970 and 2038
+
