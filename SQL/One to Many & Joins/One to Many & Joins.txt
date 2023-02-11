@@ -1,0 +1,76 @@
+CREATE TABLE customers(
+    customer_id INT PRIMARY KEY AUTO_INCREMENT,
+    first_name VARCHAR(45),
+    last_name VARCHAR(45),
+    email VARCHAR(45)
+);
+
+CREATE TABLE orders(
+    order_id INT PRIMARY KEY AUTO_INCREMENT,
+    order_date DATE,
+    amount FLOAT(8, 2),
+    customer_id INT,                               -- This and below line is for foreign key
+    FOREIGN KEY(customer_id) REFERENCES customers(customer_id)    
+);
+
+INSERT INTO customers (first_name, last_name, email) 
+VALUES ('Boy', 'George', 'george@gmail.com'),
+       ('George', 'Michael', 'gm@gmail.com'),
+       ('David', 'Bowie', 'david@gmail.com'),
+       ('Blue', 'Steele', 'blue@gmail.com'),
+       ('Bette', 'Davis', 'bette@aol.com');
+       
+       
+INSERT INTO orders (order_date, amount, customer_id)
+VALUES ('2016-02-10', 99.99, 1),
+       ('2017-11-11', 35.50, 1),
+       ('2014-12-12', 800.67, 2),
+       ('2015-01-03', 12.50, 2),
+       ('1999-04-11', 450.25, 5);
+
+// 1. CROSS JOINS
+. Joins every single row of customer with every single row of order
+. Very less used
+e.g. SELECT * FROM customers, orders;
+
+2. INNER JOINS
+. Select all records FROM A and B where join condition is met
+
+-- INNER JOINS with GROUP BY
+SELECT first_name, last_name, SUM(amount) AS total FROM customers         					
+JOIN orders											
+ON customers.customer_id = orders.customer_id  	
+GROUP BY first_name, last_name
+ORDER BY total;
+
+3. LEFT JOINS
+. Select everything from A and matching cols from B
+SELECT first_name, last_name, order_date, amount FROM customers         					
+LEFT JOIN orders											
+ON customers.customer_id = orders.customer_id;
+
+-- LEFT JOIN With GROUP BY and IFNULL(param1, replacingValue) --> If null is found
+SELECT first_name, last_name, IFNULL(SUM(amount), 0) AS money_spent FROM customers         					
+LEFT JOIN orders											
+ON customers.customer_id = orders.customer_id
+GROUP BY first_name, last_name;
+
+
+4. RIGHT JOINS
+. Select everything from B and matching cols from A
+
+
+5. ON DELETE CASCADE AND ON DELETE NULL
+. Foreign key constraint: We can't delete customer_id from customers table if that is customer_id in orders table
+. So if we wanna delete this and the corresponding rows in orders table
+ we use ON DELETE CASCADE
+		OR 
+	ON DELETE NULL
+
+CREATE TABLE orders(
+    order_id INT PRIMARY KEY AUTO_INCREMENT,
+    order_date DATE,
+    amount FLOAT(8, 2),
+    customer_id INT,                               -- This and below line is for foreign key
+    FOREIGN KEY(customer_id) REFERENCES customers(customer_id) ON DELETE CASCADE
+);
