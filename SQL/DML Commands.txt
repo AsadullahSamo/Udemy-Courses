@@ -1,0 +1,45 @@
+These commands work on data level
+We will be using Students example again
+
+A. INSERT --> Use to insert values in table
+Syntax: INSERT INTO Students VALUES(1, 'Asad');
+	INSERT INTO Students VALUES(2, 'Moiz');
+	INSERT INTO Students VALUES(3, 'Waryal');
+
+1. to insert specific values in specific cols we use
+Syntax: INSERT INTO Table_Name (col1, col2, col3) VALUES(Value1, Value2, Value3);
+
+2. Shorthand is 
+Syntax: INSERT INTO Table_Name 
+	VALUES(firstRow values), (secondRow Values), (thirdRow Values);
+
+3.. To copy data of one table to another we can use insert like
+	INSERT INTO Student1 
+	SELECT * FROM Students;
+4. To copy some cols from table1 to table2
+	INSERT INTO Student1 
+	SELECT Name FROM Students;
+
+B. UPDATE --> Use to update data in a table
+1.  To update Entire column with given value
+Syntax: UPDATE TableName SET Column1 = Value1, Column2 = Value2;
+e.g.    UPDATE Students set Name = 'Hassan' (Now entire column name will be filled with hassan)
+
+2. To update specific Cols with specific values using WHERE Clause
+Syntax:   UPDATE TableName SET Column1 = Value1, Column2 = Value2 WHERE condition;
+	e.g. update Students SET Id = 7, Name = 'Hassan' Where Name = 'Asad';
+3. Using Expression 
+	e.g. update Students SET Id = Id+7 Where Name = 'Asad';
+
+C. DELETE
+.Used to delete a table or its some data using WHERE clause(but just data inside table is deleted not table itself, data can be roll backed) 
+
+1. To delete entire table
+SET SQL_SAFE_UPDATES = 0; --> Also run this before delete
+Syntax: DELETE FROM TableName
+ROLLBACK; --> To rollback data
+
+2. To delete some data
+Syntax:  DELETE FROM TableName WHERE ColName = Value
+
+	

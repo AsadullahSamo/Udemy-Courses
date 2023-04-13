@@ -1,0 +1,54 @@
+-- Window funcs work like group by, but they show aggregate funcs results with every row
+SELECT emp_no, department, salary, AVG(salary) OVER() FROM employees;
+
+SELECT emp_no, department, salary, MIN(salary) OVER(), MAX(salary) OVER()
+FROM employees;
+    
+-- SELECT emp_no, department, salary, MIN(salary), MAX(salary)      --> This will give error, as we are using aggregate funcs which gives one row, and at 
+-- FROM employees;														the same time we are also retreiving multiple rows (e.g. emp_no, department, salary)
+
+-- 1. PARTITION BY    --> Inside of OVER() use partition by to form rows into group of rows
+SELECT emp_no, department, salary, MIN(salary) OVER(PARTITION BY department), MAX(salary) OVER(PARTITION BY department)
+FROM employees;
+
+-- 2.  ORDER BY   --> With over   --> will give running sum, or min or max
+SELECT emp_no, department, salary, SUM(salary) OVER(PARTITION BY department ORDER by salary) AS running_sum
+FROM employees;
+
+-- Pure Window funcs    --> Can't be used with group by
+-- 3. RANK()     --> Returns the rank of the current row with its partition, with gaps
+SELECT emp_no, department, 
+RANK() OVER(PARTITION BY department ORDER BY salary DESC) AS dept_salary_rank,
+RANK() OVER(ORDER BY salary DESC) AS overall_salary_rank
+FROM employees
+ORDER BY department;
+
+-- 4. ROW_NUMBER() AND 5. DENSE_RANK()
+SELECT emp_no, department, salary,
+RANK() OVER(PARTITION BY department ORDER BY salary DESC) AS dept_salary_rank,
+RANK() OVER(ORDER BY salary) AS overall_rank,
+DENSE_RANK() OVER(ORDER BY salary) AS 'dense_rank',
+ROW_NUMBER() OVER(ORDER BY salary) AS 'row_number'
+FROM employees
+ORDER BY overall_rank;
+
+-- 6. NTILE(n)
+SELECT emp_no, department, salary,
+    NTILE(4) OVER(PARTITION BY department ORDER BY salary DESC) AS dept_salary_quartile,
+	NTILE(4) OVER(ORDER BY salary DESC) AS salary_quartile
+FROM employees;
+
+-- 7. FIRST_VALUE(n), LAST_VALUE(n) and NTH_VALUE(exp, n)
+SELECT emp_no, department, salary, 
+FIRST_VALUE(emp_no) OVER(PARTITION BY department ORDER BY salary DESC) AS highest_paid_overall,
+FIRST_VALUE(emp_no) OVER(ORDER BY salary DESC) AS highest_paid_overall
+FROM employees
+ORDER BY department;
+
+-- 8.LEAD() and LAG()    --> LEAD shows next exp and lag gives prev exp
+ SELECT emp_no, department, salary, 
+ LEAD(salary) OVER(ORDER BY salary) AS next_salary, 
+ LAG(salary) OVER(PARTITION BY department ORDER BY salary) AS dept_prev_salary,
+ salary - LAG(salary) OVER(ORDER BY salary) AS salary_diff,
+ LAG(salary) OVER(PARTITION BY department ORDER BY salary) AS dept_salary_diff
+ FROM employees;

@@ -1,0 +1,83 @@
+Click first sign(+SQL under file tab) to open Query editior
+DDL Commands are Table level commands (can't modfiy data in table e.g. change Name from Asad to Junaid etc)
+
+USE --> Used to access particular database
+Syntax: Use Database_Name;
+
+A. DESCRIBE Table_Name --> To See all attrbs of a table
+
+B. CREATE --> USE to create table, database, views etc
+First: USE mydb (where mydb is database name) --> Through this it'll go to mydb database
+Syntax:  CREATE Table Students(
+         Id INT NOT NULL, 
+	 Name VARCHAR(45) NOT NULL,
+	 PRIMARY KEY(`Id`)
+	 );
+
+
+C. INSERT --> Use to insert values in table
+Syntax: INSERT INTO Students VALUES(1, 'Asad');
+	INSERT INTO Students VALUES(2, 'Moiz');
+	INSERT INTO Students VALUES(3, 'Waryal');
+
+OR to insert specific values in specific cols we use
+Syntax: INSERT INTO Table_Name (col1, col2, col3) VALUES(Value1, Value2, Value3);
+
+OR Shorthand is 
+Syntax: INSERT INTO Table_Name 
+	VALUES(firstRow values), (secondRow Values), (thirdRow Values);
+
+
+D. ALTER --> Use to 
+	1. add new column in table
+	Syntax: ALTER Table Table_NAME ADD(ColName DATATYPE, COLNAME DATATYPE);
+ 	E.g. (In Our Case) ALTER Table Students ADD(GRADE VARCHAR(45), Roll_Number INT);
+	
+	2. Drop/Delete the column
+	Syntax: ALTER Table Table_NAME DROP COLUMN ColName;
+	E.g. ALTER TABLE Students DROP COLUMN GRADE;
+	
+	3. Modify the datatype (increase or decrease its size) OR Change the datatype (but make sure col is empty if you change datatype)
+	Syntax: ALTER Table Table_NAME MODIFY COLUMN Colname DATATYPE(SIZE);
+	e.g. ALTER Table Students MODIFY Column_Name VARCHAR(50);  --> (VARCHAR size increased from 45 to 50)
+
+	4. Rename the Column
+	Syntax: ALTER Table Table_NAME
+	RENAME CoLUMN ColName1 TO NewName1;
+	RENAME CoLUMN ColName2 TO NewName2;
+			     .           .
+			     .           .
+	RENAME CoLUMN ColNameN TO NewNameN;
+	e.g. ALTER TABLE Students 
+	RENAME COLUMN GRADE TO result,
+	RENAME COLUMN Roll_Number TO StudentRollNumber;
+
+E. DROP --> Used to delete a table OR database
+// First Go to database through 
+use Database_Name; 
+then run below command
+Syntax: DROP Table Table_Name;
+Syntax: DROP Database Database_Name;
+
+F. TRUNCATE --> Used to delete a table (but just data inside table is deleted not table itself, data will be permanently deleted, and can't be rolled back) 
+Syntax: TRUNCATE Table Table_Name;
+e.g.    TRUNCATE Table Students
+
+
+G. DELETE --> It comes under DML
+.Used to delete a table (but just data inside table is deleted not table itself, data can be roll backed) 
+SET SQL_SAFE_UPDATES = 0; --> Also run this before delete
+Syntax: DELETE FROM TableName
+ROLLBACK; --> To rollback data
+
+Before using DELETE, TRUNCATE OR DROP, run below command
+SET autocommit = 0;
+
+.Always use 
+commit;
+command after insertion or updation (if autocommit=0)
+. if autocommit=1 then no need to run commit; command
+
+H. RENAME --> USE To rename a table
+Syntax: RENAME TABLE Table_Name TO New_Name;
+e.g. RENAME TABLE Students TO Students_Information;

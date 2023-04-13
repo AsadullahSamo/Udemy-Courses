@@ -1,0 +1,26 @@
+Used to get an element quickly
+
+1. To create index
+
+Syntax:
+
+CREATE INDEX index_name
+ON table_name(col1, col2, col3...);
+
+2. To delete index
+
+Syntax:
+DROP INDEX index_name ON table_name
+
+3. To view how many indexes are on a table use
+a. SHOW INDEX FROM table_name      -- e.g.
+SHOW INDEX FROM earthquake
+
+Guidelines for Index
+
+1. Automatically creates index for PK and UNIQUE cols
+2. Always make index of those columns from which you will be retreiving data 
+frequently 
+3. Index columns which have joins to improve joins performance
+4. Always avoid indexing cols that contain too much NULL vals(because its effect searching result)
+5. Small tables do not require indexes (use which contains thousands of records)
